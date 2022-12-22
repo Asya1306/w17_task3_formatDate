@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function formatDate(date) {
+            const milsecResult = new Date() - date;
+            const secResult = milsecResult * 0.001;
+            const minResult = secResult / 60;
+            const hoursResult = minResult / 60;
+            const yearResult = date.getFullYear();
+            let monthResult = date.getMonth() + 1;
+            let dayResult = date.getDate();
+            let userHour = date.getHours();
+            let userMinutes = date.getMinutes();
+
+            if (monthResult < 10) {
+                monthResult = '0' + monthResult
+            }
+            if (dayResult < 10) {
+                dayResult = '0' + dayResult
+            }
+            if (userHour < 10) {
+                userHour = '0' + userHour
+            }
+            if (userMinutes < 10) {
+                userMinutes = '0' + userMinutes
+            }
+
+            if (secResult < 1) {
+                alert('прямо сейчас')
+            } else if (minResult < 1) {
+                alert(`${Math.floor(secResult)} сек. назад`)
+            } else if (hoursResult < 1) {
+                alert(`${Math.floor(minResult)} мин. назад`)
+            } else {
+                alert(`${dayResult}.${monthResult}.${yearResult} ${userHour}:${userMinutes}`)
+            }
+        }
+        //проверка 
+        //alert(formatDate(new Date(new Date - 1))); // "прямо сейчас"
+        //alert(formatDate(new Date(new Date - 30 * 1000))); // "30 сек. назад"
+        //alert(formatDate(new Date(new Date - 5 * 60 * 1000))); // "5 мин. назад"
+        // вчерашняя дата вроде 31.12.2016, 20:00
+        alert(formatDate(new Date(new Date - 86400 * 4 * 1000)));
+    </script>
+</body>
+
+</html>
